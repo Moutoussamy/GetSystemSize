@@ -10,7 +10,7 @@ This script will allow to calculate the system size for the running NAMD MD simu
 python get_system_size.py XXXX.pdb
 ```
 
-for example:
+## Example:
 ```
 python get_system_size.py toy.pdb
 ```
