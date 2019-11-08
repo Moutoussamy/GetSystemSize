@@ -10,16 +10,30 @@ __author__ = "Emmanuel Edouard MOUTOUSSAMY"
 __version__  = "1.0.0"
 __date__ = "2015/09"
 __copyright__ = "CC_by_SA"
-__dependencies__ = "os, sys, numpy"
+__dependencies__ = "sys, numpy"
 
 import numpy as np
-import os
+import argparse
 import sys
 
 
+def GetArgs():
+
+	"""
+	Get the arguments: pdb a)
+	:return: arg.i = PDB and arg.d = distance from the bilayer plane
+	"""
+	parser = argparse.ArgumentParser(description='IBS composition Anlaysis') #Title
+
+	parser.add_argument('-i', metavar = "pdb", type = str, help = "pdb file") #Argument for the pdb
+	parser.add_argument('-w', metavar="wat", default=0, type=bool, help= "take only water molecule", required=False) #distance
+
+	args = parser.parse_args()
+
+	return args
 
 
-def get_coord(pdb):
+def get_coord(pdb,wat):
 	"""
 	collect the coordinate from a PDB file
 	:param pdb: a pdb file format: http://cupnet.net/pdb-format/
@@ -28,9 +42,14 @@ def get_coord(pdb):
 
 	flag = 0
 
-	with open(sys.argv[1],"r") as input_file:
+	if wat:
+		watornotwat = "TIP3"
+	else:
+		watornotwat = "ATOM"
+
+	with open(pdb,"r") as input_file:
 		for line in input_file:
-			if line[0:4] == "ATOM":
+			if line[0:4] == "ATOM" and watornotwat in line:
 				x = float(line[30:38]) #get x coord
 				y = float(line[38:46]) #get y coord
 				z = float(line[46:54]) #get z coord
@@ -65,7 +84,8 @@ def CoordInfo(coord):
 
 if __name__ == '__main__':
 
-	coord = get_coord(sys.argv[1])
+	args = GetArgs()  # get arguments
+	coord = get_coord(args.i,args.w)
 	argx, argy, argz, centerx, centery, centerz = CoordInfo(coord)
 
 
