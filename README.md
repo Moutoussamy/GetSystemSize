@@ -2,7 +2,7 @@
  Get the system size for the running NAMD MD simulation
 ## Informations
 
-This script will allow to calculate the system size for the running NAMD Molecular Dynamics simulations.
+This script allow to calculate the system size for the running NAMD Molecular Dynamics simulations.
 
 ## Usage
 
