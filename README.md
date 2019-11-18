@@ -23,7 +23,8 @@ cellBasisVector3 0 0 93.989
 cellOrigin 0.0194285622995 0.107997277712 46.8495300155
 ```
 
-## Only water molecule:
+## Only water molecule
+
 It is convenient sometimes to calculate the box size only for the water molecule (e.g. protein/membrane system). If you want to do that you  have to add the "-w" option:
 
 ```
